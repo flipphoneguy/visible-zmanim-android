@@ -1,0 +1,8 @@
+{
+    "package": "com.flipphoneguy.visiblezmanim",
+    "name": "Visible Zmanim",
+    "min_sdk": 23,
+    "target_sdk": 35,
+    "repo": "flipphoneguy/visible-zmanim-android",
+    "github_profile": "https://github.com/flipphoneguy"
+}
