@@ -25,4 +25,7 @@
     <color name="item_pressed_bg">#1E2230</color>
 
     <color name="card_border">#252838</color>
+    <color name="land">#3A4256</color>
+    <color name="warn">#F59E0B</color>
+    <color name="key_row">#7B8FD4</color>
 </resources>

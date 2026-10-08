@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_page">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:background="@color/bg_header"
+        android:gravity="center_vertical"
+        android:paddingLeft="8dp"
+        android:paddingRight="16dp">
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:text="←"
+            android:textSize="20sp"
+            android:textColor="@color/text_on_primary"
+            android:background="@drawable/btn_header"
+            android:contentDescription="Back"
+            android:focusable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="Settings"
+            android:textColor="@color/text_on_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <LinearLayout style="@style/Card">
+                <TextView style="@style/SectionTitle" android:text="Units" />
+                <RadioGroup android:id="@+id/units" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                    <RadioButton android:id="@+id/units_metric" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Metric (m, km)" android:textColor="@color/text_primary" />
+                    <RadioButton android:id="@+id/units_imperial" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Imperial (ft, mi)" android:textColor="@color/text_primary" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout style="@style/Card">
+                <TextView style="@style/SectionTitle" android:text="Where you are" />
+
+                <TextView style="@style/FieldLabel" android:layout_marginTop="0dp" android:text="Height above ground" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
+                    <EditText android:id="@+id/height" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:inputType="numberDecimal" android:textColor="@color/text_primary" />
+                    <TextView android:id="@+id/height_unit" android:layout_width="40dp" android:layout_height="wrap_content" android:gravity="center" android:textColor="@color/text_secondary" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                    <Button android:id="@+id/floor0" style="@style/BtnOutline" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textSize="13sp" android:paddingLeft="4dp" android:paddingRight="4dp" android:text="Standing" />
+                    <Button android:id="@+id/floor1" style="@style/BtnOutline" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginLeft="4dp" android:textSize="13sp" android:paddingLeft="4dp" android:paddingRight="4dp" android:text="2nd fl." />
+                    <Button android:id="@+id/floor4" style="@style/BtnOutline" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginLeft="4dp" android:textSize="13sp" android:paddingLeft="4dp" android:paddingRight="4dp" android:text="5th fl." />
+                    <Button android:id="@+id/floor9" style="@style/BtnOutline" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginLeft="4dp" android:textSize="13sp" android:paddingLeft="4dp" android:paddingRight="4dp" android:text="10th fl." />
+                </LinearLayout>
+                <TextView style="@style/Why" android:layout_marginTop="4dp" android:text="How high your eyes are above the ground. On an upper floor add about 3 m (10 ft) per floor. Higher means you see over nearby hills sooner." />
+
+                <TextView style="@style/FieldLabel" android:text="Ground elevation" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
+                    <EditText android:id="@+id/ground" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:hint="Automatic" android:inputType="numberDecimal|numberSigned" android:textColor="@color/text_primary" android:textColorHint="@color/text_secondary" />
+                    <TextView android:id="@+id/ground_unit" android:layout_width="40dp" android:layout_height="wrap_content" android:gravity="center" android:textColor="@color/text_secondary" />
+                </LinearLayout>
+                <TextView style="@style/Why" android:text="Leave empty to take it from the elevation data. Only fill it in if you know it better." />
+
+                <TextView style="@style/FieldLabel" android:text="Ignore terrain closer than" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
+                    <EditText android:id="@+id/mind" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:inputType="numberDecimal" android:textColor="@color/text_primary" />
+                    <Spinner android:id="@+id/mind_unit" android:layout_width="90dp" android:layout_height="wrap_content" />
+                </LinearLayout>
+                <TextView style="@style/Why" android:text="Ground very close to you, like a slope across the street, can decide the result on its own, so by default anything within 100 m (330 ft) is ignored. Set 0 to include everything." />
+            </LinearLayout>
+
+            <LinearLayout style="@style/Card">
+                <TextView style="@style/SectionTitle" android:text="Show" />
+                <CheckBox android:id="@+id/col_visible" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Visible: over the real hills and mountains" android:textColor="@color/text_primary" />
+                <CheckBox android:id="@+id/col_elevation" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Elevation: seeing down to a sea-level horizon from your height" android:textColor="@color/text_primary" />
+                <CheckBox android:id="@+id/col_sea" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Standard: flat horizon at sea level, like most apps" android:textColor="@color/text_primary" />
+
+                <TextView style="@style/FieldLabel" android:text="Clock" />
+                <RadioGroup android:id="@+id/clock" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                    <RadioButton android:id="@+id/clock12" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="12-hour" android:textColor="@color/text_primary" />
+                    <RadioButton android:id="@+id/clock24" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="24-hour" android:textColor="@color/text_primary" />
+                </RadioGroup>
+
+                <TextView style="@style/FieldLabel" android:text="Seconds" />
+                <RadioGroup android:id="@+id/secs" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                    <RadioButton android:id="@+id/secs_show" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Show seconds" android:textColor="@color/text_primary" />
+                    <RadioButton android:id="@+id/secs_round" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Round like a luach" android:textColor="@color/text_primary" />
+                </RadioGroup>
+                <TextView style="@style/Why" android:text="Rounded: deadlines (sof zman shma and tefila, candle lighting, sunset) round down, everything else rounds up." />
+
+                <TextView style="@style/FieldLabel" android:text="Time zone" />
+                <EditText android:id="@+id/tz" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Automatic (the location's own)" android:inputType="text" android:singleLine="true" android:textColor="@color/text_primary" android:textColorHint="@color/text_secondary" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/Card">
+                <TextView style="@style/SectionTitle" android:text="Advanced" />
+                <TextView style="@style/Why" android:text="Leave these unless you know why you are changing them." />
+                <TextView style="@style/FieldLabel" android:text="Horizon refraction (arcminutes)" />
+                <EditText android:id="@+id/refr" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="34" android:inputType="numberDecimal" android:textColor="@color/text_primary" android:textColorHint="@color/text_secondary" />
+                <TextView style="@style/FieldLabel" android:text="Ground-level bending (k)" />
+                <EditText android:id="@+id/kk" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="0.13" android:inputType="numberDecimal|numberSigned" android:textColor="@color/text_primary" android:textColorHint="@color/text_secondary" />
+            </LinearLayout>
+
+            <Button android:id="@+id/btn_reset" style="@style/BtnOutline" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Reset settings" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

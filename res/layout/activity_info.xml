@@ -153,6 +153,36 @@
                     android:text="@string/btn_app_repo"
                     android:layout_marginTop="8dp"
                     android:nextFocusUp="@id/btn_github_profile"
+                    android:nextFocusDown="@+id/btn_website" />
+
+                <Button
+                    android:id="@+id/btn_website"
+                    style="@style/BtnOutline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Website"
+                    android:layout_marginTop="8dp"
+                    android:nextFocusUp="@id/btn_app_repo"
+                    android:nextFocusDown="@+id/btn_method" />
+
+                <Button
+                    android:id="@+id/btn_method"
+                    style="@style/BtnOutline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="How it's calculated"
+                    android:layout_marginTop="8dp"
+                    android:nextFocusUp="@id/btn_website"
+                    android:nextFocusDown="@+id/btn_engine" />
+
+                <Button
+                    android:id="@+id/btn_engine"
+                    style="@style/BtnOutline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Calculation engine source"
+                    android:layout_marginTop="8dp"
+                    android:nextFocusUp="@id/btn_method"
                     android:nextFocusDown="@+id/btn_theme" />
             </LinearLayout>
 
@@ -179,7 +209,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:nextFocusUp="@id/btn_app_repo" />
+                    android:nextFocusUp="@id/btn_engine" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

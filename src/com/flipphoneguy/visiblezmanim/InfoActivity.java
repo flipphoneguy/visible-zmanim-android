@@ -63,6 +63,15 @@ public class InfoActivity extends Activity {
             }
         });
 
+        String[] urls = {Api.WEBSITE, Api.METHOD, Api.ENGINE_REPO};
+        int[] ids = {R.id.btn_website, R.id.btn_method, R.id.btn_engine};
+        for (int i = 0; i < ids.length; i++) {
+            final String url = urls[i];
+            findViewById(ids[i]).setOnClickListener(new View.OnClickListener() {
+                @Override public void onClick(View v) { openUrl(url); }
+            });
+        }
+
         final Button btnTheme = (Button) findViewById(R.id.btn_theme);
         btnTheme.setText(THEME_LABELS[ThemeHelper.getMode(this)]);
         btnTheme.setOnClickListener(new View.OnClickListener() {
