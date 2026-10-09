@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -48,13 +49,20 @@ public class SettingsActivity extends Activity {
                 fill();
             }
         });
-        int[] floors = {R.id.floor0, R.id.floor1, R.id.floor4, R.id.floor9};
-        final int[] counts = {0, 1, 4, 9};
-        for (int i = 0; i < floors.length; i++) {
-            final int n = counts[i];
-            findViewById(floors[i]).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.h_zero).setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) { height.setText("0"); }
+        });
+        findViewById(R.id.h_stand).setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) { height.setText(Fmt.num(p.toDisplay(Prefs.DEFAULT_HEIGHT_M), 1)); }
+        });
+        // About one floor per step: 10 ft or 3 m.
+        int[] steps = {R.id.h_minus, R.id.h_plus};
+        for (int i = 0; i < steps.length; i++) {
+            final int sign = i == 0 ? -1 : 1;
+            findViewById(steps[i]).setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
-                    height.setText(Fmt.num(p.toDisplay(Prefs.DEFAULT_HEIGHT_M + 3 * n), 1));
+                    double h = parse(height, 0) + sign * (p.imperial ? 10 : 3);
+                    height.setText(Fmt.num(Math.max(0, h), 1));
                 }
             });
         }
@@ -81,6 +89,9 @@ public class SettingsActivity extends Activity {
         ground.setText(Double.isNaN(p.groundM) ? "" : Fmt.num(p.toDisplay(p.groundM), 1));
         ((TextView) findViewById(R.id.height_unit)).setText(p.lengthUnit());
         ((TextView) findViewById(R.id.ground_unit)).setText(p.lengthUnit());
+        String step = p.imperial ? "10 ft" : "3 m";
+        ((Button) findViewById(R.id.h_minus)).setText("−" + step);
+        ((Button) findViewById(R.id.h_plus)).setText("+" + step);
         String[] units = p.minDistUnits();
         ArrayAdapter<String> a = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, units);
         a.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
