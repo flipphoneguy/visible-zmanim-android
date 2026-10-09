@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  html, body, #map { margin:0; height:100%; background:__BG__; }
+  #pin { position:absolute; left:50%; top:50%; width:34px; height:46px; margin:-46px 0 0 -17px; z-index:1000; pointer-events:none; }
+  #err { display:none; position:absolute; inset:0; padding:24px; color:__FG__; font:15px sans-serif; text-align:center; align-items:center; justify-content:center; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<svg id="pin" viewBox="0 0 34 46"><path d="M17 45C17 45 2 27 2 16.5a15 15 0 0 1 30 0C32 27 17 45 17 45z" fill="#E53935" stroke="#fff" stroke-width="2.5"/><circle cx="17" cy="16.5" r="5.5" fill="#fff"/></svg>
+<div id="err">Couldn't load the map. Check your connection and try again.</div>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  // Filled in by the app: [lat, lon, zoom, layer].
+  var START = __START__;
+  if (!window.L) {
+    document.getElementById('err').style.display = 'flex';
+    document.getElementById('pin').style.display = 'none';
+  } else {
+    var layers = {
+      'Map': L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }),
+      'Satellite': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, attribution: 'Imagery &copy; Esri, Maxar, Earthstar Geographics, and the GIS User Community' })
+    };
+    var current = layers[START[3]] ? START[3] : 'Map';
+    var map = L.map('map', { zoomControl: true, layers: [layers[current]] }).setView([START[0], START[1]], START[2]);
+    L.control.layers(layers, null, { collapsed: false }).addTo(map);
+    // The app reads the title to show the coordinates and to get the result.
+    var report = function () { var c = map.getCenter().wrap(); document.title = c.lat.toFixed(6) + ',' + c.lng.toFixed(6) + ',' + current; };
+    map.on('baselayerchange', function (e) { current = e.name; report(); });
+    map.on('move', report);
+    report();
+  }
+</script>
+</body>
+</html>

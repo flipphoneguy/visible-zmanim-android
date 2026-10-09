@@ -40,6 +40,10 @@
             android:name=".InfoActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".MapPickActivity"
+            android:exported="false" />
+
         <provider
             android:name=".ApkFileProvider"
             android:authorities="com.flipphoneguy.visiblezmanim.fileprovider"

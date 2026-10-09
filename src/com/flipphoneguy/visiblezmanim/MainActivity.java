@@ -66,6 +66,7 @@ public class MainActivity extends Activity {
     private static final String[][] VARIANTS = {{"visible", "Visible"}, {"elevation", "Elevation"}, {"sea_level", "Standard"}};
     private static final int MAX_RETRIES = 16;
     private static final int REQ_LOCATION = 1;
+    private static final int REQ_MAP = 2;
 
     private Prefs p;
     private Places places;
@@ -120,6 +121,7 @@ public class MainActivity extends Activity {
         click(R.id.btn_calc, new Runnable() { public void run() { calculateFromFields(); } });
         click(R.id.btn_gps, new Runnable() { public void run() { useMyLocation(); } });
         click(R.id.btn_saved, new Runnable() { public void run() { showSaved(); } });
+        click(R.id.btn_map, new Runnable() { public void run() { pickOnMap(); } });
         click(R.id.btn_fav, new Runnable() { public void run() { toggleFavorite(); } });
         click(R.id.btn_prev, new Runnable() { public void run() { shift(-1); } });
         click(R.id.btn_next, new Runnable() { public void run() { shift(1); } });
@@ -309,6 +311,20 @@ public class MainActivity extends Activity {
         stopLocation();
         label = "My location";
         setLocation(l.getLatitude(), l.getLongitude(), l.getAccuracy() > 100 ? "Your phone gave a rough location (±" + Math.round(l.getAccuracy()) + " m)." : null);
+        calculate(null);
+    }
+
+    private void pickOnMap() {
+        Intent i = new Intent(this, MapPickActivity.class);
+        if (!Double.isNaN(lat)) i.putExtra(MapPickActivity.EXTRA_LAT, lat).putExtra(MapPickActivity.EXTRA_LON, lon);
+        startActivityForResult(i, REQ_MAP);
+    }
+
+    @Override
+    protected void onActivityResult(int code, int result, Intent data) {
+        if (code != REQ_MAP || result != RESULT_OK || data == null) return;
+        label = "Map pin";
+        setLocation(data.getDoubleExtra(MapPickActivity.EXTRA_LAT, Double.NaN), data.getDoubleExtra(MapPickActivity.EXTRA_LON, Double.NaN), null);
         calculate(null);
     }
 
