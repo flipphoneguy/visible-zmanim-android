@@ -188,20 +188,22 @@ public class MainActivity extends Activity {
         addr.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override public boolean onEditorAction(TextView v, int action, KeyEvent e) {
                 if (action != EditorInfo.IME_ACTION_SEARCH && action != EditorInfo.IME_ACTION_DONE) return false;
-                String q = addr.getText().toString().trim();
-                if (q.length() == 0) return true;
-                hideKeyboard();
-                addr.dismissDropDown();
-                if (adapter.getCount() > 0) {
-                    addr.getOnItemClickListener().onItemClick(null, null, 0, 0);
-                } else {
-                    label = q;
-                    lat = lon = Double.NaN;
-                    calculate(q);
-                }
+                searchTyped();
                 return true;
             }
         });
+        click(R.id.btn_search, new Runnable() { public void run() { searchTyped(); } });
+    }
+
+    /** Looks up the typed text on the server, which can find addresses the suggestions miss. */
+    private void searchTyped() {
+        String q = addr.getText().toString().trim();
+        if (q.length() == 0) return;
+        hideKeyboard();
+        addr.dismissDropDown();
+        label = q;
+        lat = lon = Double.NaN;
+        calculate(q);
     }
 
     private final class SuggestAdapter extends ArrayAdapter<Api.Suggestion> {
