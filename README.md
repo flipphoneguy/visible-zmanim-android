@@ -4,7 +4,7 @@ Sunrise and sunset over the real hills and mountains around you, not a flat sea-
 
 **Download:** [VisibleZmanim.apk](https://github.com/flipphoneguy/visible-zmanim-android/releases/latest/download/VisibleZmanim.apk) (Android 6 and up). The app can update itself from the About screen.
 
-It covers address search, your GPS location, saved places, a day or a whole month, visible, elevation and standard sea-level times side by side, the horizon drawing, and metric or imperial units. Also available as a website: [tools.flipphoneguy.duckdns.org/zmanim](https://tools.flipphoneguy.duckdns.org/zmanim).
+It covers address search, your GPS location, picking a spot on a map or satellite view, saved places, a day or a whole month, visible, elevation and standard sea-level times side by side, the horizon drawing, and metric or imperial units. Also available as a website: [tools.flipphoneguy.duckdns.org/zmanim](https://tools.flipphoneguy.duckdns.org/zmanim).
 
 ## Build
 
